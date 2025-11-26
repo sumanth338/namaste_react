@@ -115,6 +115,10 @@
   border: 1.5px solid #cf711f;
 }
 
+.checkbox-label input[type="checkbox"] {
+  margin-right: 10px;
+}
+
 .custom-checkbox {
   appearance: none;
   width: 18px;
@@ -261,6 +265,26 @@
   color: #e67e22;
 }
 
+/* Login Button */
+.btn-login {
+  background:  #f4845f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 22px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(244, 132, 95, 0.08);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-login:hover {
+  background:  #ffb68d;
+  color: #fff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(244, 132, 95, 0.14);
+}
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .nav-link {
@@ -294,5 +318,10 @@
 
   .restaurants-section {
     padding: 20px 0;
+  }
+
+  .btn-login {
+    width: 100%;
+    margin-top: 10px;
   }
 }

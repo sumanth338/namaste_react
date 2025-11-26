@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Header = () => {
+  const [button, setButton] = useState("Login")
+
+  const handleLogin = ()=>{
+    button === "Login"? setButton("Logout"):setButton("Login")
+  }
     return (
           <header className="sticky-top" style={{ backgroundColor: "#fdf2e9" }}>
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -56,6 +61,11 @@ const Header = () => {
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       0
                     </span>
+                  </button>
+                  {/* Login Button */}
+                  <button className="btn btn-login ms-3" onClick={handleLogin}>
+                    <i className="bi bi-person-circle me-2"></i>
+                    {button}
                   </button>
                 </div>
               </div>
