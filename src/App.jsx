@@ -1,42 +1,73 @@
 import React, { useState } from 'react'
 import Header from './components/Header';
-import Searchbar from './components/Searchbar';
 import RestaurantCard from './components/RestaurantCard';
 import restaurants from './utils/ResturantData';
 
 const App = () => {
   const [showTopRated, setShowTopRated] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
-  const filtered = showTopRated
-    ? restaurants.filter(r => r.rating >= 4.5)
-    : restaurants;
+  // ✅ Apply both filters
+  const filteredRestaurants = restaurants
+    .filter(r =>
+      r.name.toLowerCase().includes(searchText.toLowerCase())
+    )
+    .filter(r => (showTopRated ? r.rating >= 4.5 : true));
 
   return (
     <div>
       <Header />
-      <Searchbar />
+
+      {/* SEARCH BAR */}
+      <div className="search-container">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-8 col-lg-6">
+              <div className="search-box">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control search-input"
+                    placeholder="Search for restaurants..."
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                  />
+                  <button className="btn btn-search" type="button">
+                    <i className="bi bi-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* RESTAURANTS */}
       <div className="restaurants-section">
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">Popular Restaurants</h2>
-            <span className="filter-checkbox-wrapper">
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={showTopRated}
-                  onChange={e => setShowTopRated(e.target.checked)}
-                  className="custom-checkbox"
-                />
-                Top Rated
-              </label>
-            </span>
+
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={showTopRated}
+                onChange={(e) => setShowTopRated(e.target.checked)}
+              />
+              Top Rated
+            </label>
           </div>
+
           <div className="row">
-            {filtered.map((restaurant, index) => (
-              <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <RestaurantCard restaurant={restaurant} />
-              </div>
-            ))}
+            {filteredRestaurants.length > 0 ? (
+              filteredRestaurants.map((restaurant, index) => (
+                <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
+                  <RestaurantCard restaurant={restaurant} />
+                </div>
+              ))
+            ) : (
+              <p className="text-center">No restaurants found</p>
+            )}
           </div>
         </div>
       </div>
@@ -44,4 +75,4 @@ const App = () => {
   );
 };
 
-export default App
+export default App;
