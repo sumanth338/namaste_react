@@ -1,10 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RestaurantCard = ({ restaurant }) => {
-    const { name, image, rating, cuisine, deliveryTime } = restaurant;
+    const navigate = useNavigate();
+    const { id, name, image, rating, cuisine, deliveryTime } = restaurant;
+    
+    const handleClick = () => {
+      navigate(`/restaurant/${id}`);
+    };
     
     return (
-      <div className="restaurant-card">
+      <div 
+        className="restaurant-card" 
+        onClick={handleClick}
+      >
         <div className="card-image">
           <img src={image} alt={name} className="food-image" />
           <div className="rating-badge">
